@@ -216,6 +216,7 @@ If your auditing is not set for the database, perform the below actions.
 7. Run the below commands to enable the changes after RDS restart
 
 exec rdsadmin.rdsadmin_master_util.audit_all_sys_aud_table;
+
 exec rdsadmin.rdsadmin_master_util.audit_all_sys_aud_table(p_by_access => true);
 
 ## Disabling Auditing for the SYS.AUD$ Table
