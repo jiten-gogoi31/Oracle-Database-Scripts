@@ -1,5 +1,5 @@
 # AWS RDS Oracle-Database-Scripts
-Scripts to Manage the Database
+Scripts to Manage the AWS Oracle RDS Database.
 
 -- Below are some commands/syntaxes which would be useful in your daily life
  
