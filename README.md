@@ -115,6 +115,7 @@ end;
 **The following example grants the SELECT_CATALOG_ROLE and EXECUTE_CATALOG_ROLE to USER1. Since the with admin option is used, USER1 can now grant access to SYS objects that have been granted to SELECT_CATALOG_ROLE.**
  
 grant SELECT_CATALOG_ROLE to USER1 with admin option;
+
 grant EXECUTE_CATALOG_ROLE to USER1 with admin option;
 
 ## Revoking SELECT or EXECUTE Privileges on SYS Objects
