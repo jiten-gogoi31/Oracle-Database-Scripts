@@ -80,12 +80,12 @@ exec rdsadmin.rdsadmin_util.flush_buffer_cache;
 
 ## NOTE : The following below privileges are not available for the DBA role on an Amazon RDS DB instance using the Oracle engine:
 
-ALTER DATABASE
-ALTER SYSTEM
-CREATE ANY DIRECTORY
-DROP ANY DIRECTORY
-GRANT ANY PRIVILEGE
-GRANT ANY ROLE
+- ALTER DATABASE
+- ALTER SYSTEM
+- CREATE ANY DIRECTORY
+- DROP ANY DIRECTORY
+- GRANT ANY PRIVILEGE
+- GRANT ANY ROLE
 
 When you create a DB instance, the master user account that you use to create the instance gets DBA privileges (with some limitations). Use the master user account for any administrative tasks such as creating additional user accounts in the database. You can’t use the SYS user, SYSTEM user, and other Oracle-supplied administrative accounts.
 
