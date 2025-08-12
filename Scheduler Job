@@ -1,0 +1,4 @@
+About Oracle Scheduler Job:
+Oracle Database includes Oracle Scheduler, a job scheduler to help you simplify the scheduling of hundreds or even thousands of tasks. Oracle Scheduler (the Scheduler) is implemented by the procedures and functions in the DBMS_SCHEDULER PL/SQL package.
+You can run program units, that is, PL/SQL anonymous blocks, PL/SQL stored procedures, and Java stored procedures on the local database or on one or more remote Oracle databases.
+Run external executables, (executables that are external to the database)
