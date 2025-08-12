@@ -52,3 +52,4 @@ begin
 dbms_scheduler.run_job('IFXPRODORACLE.REGULAR_MONITORING_REPORT_JOB');
 end;
 /
+
