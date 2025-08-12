@@ -8,10 +8,10 @@ Run external executables, (executables that are external to the database)
 ## Creating a scheduler job in Oracle RDS database.
 
 **Parameters required:**
-•	Frequency of the job to be run.
-•	Package or procedure name to execute.
-•	From when we must start the job.
-•	Reason for job creation.
+1. Frequency of the job to be run.
+2. Package or procedure name to execute.
+3. From when we must start the job.
+4. Reason for job creation.
 
 ## To check existing scheduler jobs in database other than oracle pre-defined job.
 
