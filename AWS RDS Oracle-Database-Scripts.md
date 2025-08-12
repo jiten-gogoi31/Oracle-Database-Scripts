@@ -315,7 +315,7 @@ end;
 NOTE : An Amazon RDS DB instance running Oracle starts with four online redo logs, 128 MB each.
 To add additional redo logs, use the Amazon RDS procedure rdsadmin.rdsadmin_util.add_logfile.
 ```
-exec rdsadmin.rdsadmin_util.add_logfile(p_size => ‘Size in M‘);
+exec rdsadmin.rdsadmin_util.add_logfile(p_size => 'Size in M');
 ```
 ```
 exec rdsadmin.rdsadmin_util.drop_logfile(grp => Number of groups);
