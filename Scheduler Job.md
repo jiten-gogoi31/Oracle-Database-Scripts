@@ -38,6 +38,10 @@ END;
 ```
 SELECT JOB_NAME, SESSION_ID, RUNNING_INSTANCE, ELAPSED_TIME, CPU_USED FROM DBA_SCHEDULER_RUNNING_JOBS;
 ```
+## To check the JOB Status or If the target JOB is SUCCEEDED or not.
+```
+SELECT job_name, log_date, status, actual_start_date, run_duration, cpu_used FROM dba_scheduler_job_run_details where job_name='YOUR JOB NAME';
+```
 
 **Disable a job:**
 ```
