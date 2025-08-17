@@ -18,6 +18,9 @@ Run external executables, (executables that are external to the database)
 ```
 SELECT OWNER,JOB_NAME,JOB_ACTION,REPEAT_INTERVAL FROM DBA_SCHEDULER_JOBS WHERE OWNER NOT IN ('SYS','ORACLE_OCM') ORDER BY OWNER,JOB_NAME;
 ```
+```
+SELECT * FROM DBA_SCHEDULER_JOBS WHERE OWNER NOT IN ('SYS','ORACLE_OCM') ORDER BY OWNER,JOB_NAME;
+```
 
 **Statement to Create a scheduler job:**
 ```
