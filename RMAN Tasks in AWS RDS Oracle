@@ -1,0 +1,184 @@
+## RMAN Tasks in AWS RDS Oracle
+
+Since AWS RDS is a PaaS, we do not have login to the Database host, rather we can connect to the database and there are some built-in queries which can help make our life easier to perform the Backup Operations in AWS RDS
+
+-- Below are some of the commands, which can be used to make our life simpler in AWS :
+
+## Validate the DB instance using the default values for the parameters
+```
+exec rdsadmin.rdsadmin_rman_util.validate_database;
+```
+
+## Validate the DB instance using the specified values for the parameters.
+```
+BEGIN
+       rdsadmin.rdsadmin_rman_util.validate_database(
+p_validation_type => ‘PHYSICAL+LOGICAL‘,
+p_parallel => 4,
+p_section_size_mb => 10,
+p_rman_to_dbms_output => FALSE);
+END;
+/
+```
+
+## Enabling and Disabling Block Change Tracking
+
+-- To determine whether block change tracking is enabled for your DB instance, run the following query.
+```
+SELECT status, filename FROM V$BLOCK_CHANGE_TRACKING;
+```
+
+## Below are the commands to enable/disable block change tracking
+
+-- To Enable 
+```
+exec rdsadmin.rdsadmin_rman_util.enable_block_change_tracking;
+```
+
+-- To Disable
+```
+exec rdsadmin.rdsadmin_rman_util.disable_block_change_tracking;
+```
+
+
+## Crosschecking Archived Redo Logs.
+
+-- The following example  cross-checks and deletes the expired archived redo logs from the control file.
+```
+BEGIN
+        rdsadmin.rdsadmin_rman_util.crosscheck_archivelog(
+        p_delete_expired      => FALSE,
+        p_rman_to_dbms_output => FALSE);
+END;
+/
+```
+
+## Setting up Archive log retention
+
+-- Here we are setting the archive log retention to 24 hours
+```
+begin
+    rdsadmin.rdsadmin_util.set_configuration(
+        name  => ‘archivelog retention hours’,
+        value => ‘24‘);
+end;
+/
+commit;
+```
+
+## Take Archive logs backup
+
+-- Here we are backing up archive logs to MYDIRECTORY directory with owner as SYS and parallelism of 4
+```
+BEGIN
+    rdsadmin.rdsadmin_rman_util.backup_archivelog_all(
+        p_owner               => ‘SYS‘,
+        p_directory_name      => ‘MYDIRECTORY‘,
+        p_parallel            => 4, 
+        p_rman_to_dbms_output => FALSE);
+END;
+/
+```
+
+
+
+
+
+
+
+
+## You can also view the logs of archive logs backup from your RDS console, traversing to Logs and then selecting the desired log and by clicking on view :
+
+
+## Take archive logs backup for a particular date range
+
+```
+BEGIN
+    rdsadmin.rdsadmin_rman_util.backup_archivelog_date(
+        p_owner               => ‘SYS‘,
+        p_directory_name      => ‘MYDIRECTORY‘,
+        p_from_date           => ‘17/11/2020 00:00:00‘,
+        p_to_date             => ‘17/12/2020 00:00:00‘,
+        p_parallel            => 4, 
+        p_rman_to_dbms_output => FALSE);
+END;
+/
+```
+
+## Backup Archive logs for a particular SCN Range.
+
+-- Here we are backing up archive logs from 15617-16617 SCN Rnage
+```
+BEGIN
+    rdsadmin.rdsadmin_rman_util.backup_archivelog_scn(
+        p_owner               => ‘SYS‘,
+        p_directory_name      => ‘MYDIRECTORY‘,
+        p_from_scn            => 15617,
+        p_to_scn              => 16617,
+        p_parallel            => 4, 
+        p_rman_to_dbms_output => FALSE);
+END;
+/
+```
+
+## Backing Up an Archived Redo Log for a Sequence Number Range.
+
+-- Here we are backing up archive logs for a Sequence ranging between 21216-21316
+``` 
+BEGIN
+    rdsadmin.rdsadmin_rman_util.backup_archivelog_sequence(
+        p_owner               => ‘SYS‘,
+        p_directory_name      => ‘MYDIRECTORY‘,
+        p_from_sequence       => 21216,
+        p_to_sequence         => 21316,
+        p_parallel            => 4, 
+        p_rman_to_dbms_output => FALSE);
+END;
+/
+```
+
+## Performing a Full Database Backup
+```
+BEGIN
+    rdsadmin.rdsadmin_rman_util.backup_database_full(
+        p_owner               => ‘SYS‘,
+        p_directory_name      => ‘MYDIRECTORY‘,
+        p_parallel            => 4, 
+        p_section_size_mb     => 10,
+        p_rman_to_dbms_output => FALSE);
+END;
+/
+```
+
+
+
+
+## Performing an Incremental Database Backup.
+```
+BEGIN
+    rdsadmin.rdsadmin_rman_util.backup_database_incremental(
+        p_owner               => ‘SYS‘,
+        p_directory_name      => ‘MYDIRECTORY‘,
+        p_level               => 1,
+        p_parallel            => 4, 
+        p_section_size_mb     => 10,
+        p_rman_to_dbms_output => FALSE);
+END;
+/
+```
+
+## Performing a Tablespace Backup.
+```
+BEGIN
+    rdsadmin.rdsadmin_rman_util.backup_tablespace(
+        p_owner               => ‘SYS‘,
+        p_directory_name      => ‘MYDIRECTORY‘,
+        p_tablespace_name     => Tablespace_name,
+        p_parallel            => 4, 
+        p_section_size_mb     => 10,
+        p_rman_to_dbms_output => FALSE);
+END;
+/
+```
+
+
